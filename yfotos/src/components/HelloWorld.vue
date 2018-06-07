@@ -12,6 +12,7 @@
       </v-container>
     </div>
     </v-card-text>
+    <!-- Se o usuário for Adm é mostrado dessa div para baixo -->
     <div v-if="selectPersonModel == 'admin'">
       <v-flex text-xs-center>
         <v-btn @click="fotosModel=true"> Fotos</v-btn>
@@ -36,6 +37,24 @@
         </v-flex>
       </div>
     </div>
+    <!-- Se o usuário for representante é mostrado dessa div para baixo -->
+    <div v-if="selectPersonModel == 'representante'">
+      <v-container wrap align-center>
+        <v-select
+          :items="arrayDeRepresentantes"
+          v-model="arrayRepModel"
+          label="Informe o representante"
+          autocomplete
+        ></v-select>
+        <v-flex 
+        v-for="(i, index) in arrayDeRepresentantes"
+        :key="index">
+          <div v-if="arrayRepModel == i">
+            <v-btn @click="fotosModel=true"> Add fotos</v-btn>
+          </div>
+        </v-flex>
+      </v-container>
+    </div>
     <!-- MODAL DE FOTOS -->
     <v-dialog v-model="fotosModel" max-width="790">
       <v-card>
@@ -49,11 +68,15 @@
             >
               <v-card flat tile>
                 <div>
+                 
+
                   <v-card-media
                     :src= arrayDeFotos[index]
                     height="250px"
+                    @dblclick="oi()"
                   >
                   </v-card-media>
+                 
                 </div>
               </v-card>
             </v-flex>
@@ -61,7 +84,7 @@
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Fechar</v-btn>
+          <v-btn color="green darken-1" flat="flat" @click.native="fotosModel = false">Fechar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -79,6 +102,8 @@ export default {
       selectPersonModel: null,
       selectPerson: ['admin', 'representante', 'usuário'],
       arrayDeFotos: [],
+      arrayDeRepresentantes: ['Lettie', 'Hari', 'Belenos'],
+      arrayRepModel: null,
       image: '',
     };
   },
@@ -99,6 +124,9 @@ export default {
       this.arrayDeFotos.push(this.image)
       console.log("abaixo devemos exibir o array de fotos")
       console.log(this.arrayDeFotos)
+    },
+    oi(){
+      console.log("oi")
     }
   }
 };
