@@ -32,7 +32,7 @@
             drag: 'Clique ou arraste uma imagem aqui 😺 '
           }">
         </picture-input>
-        <v-flex text-xs-center>
+        <v-flex v-if="onChange" text-xs-center>
           <v-btn @click="addFoto()">Adicionar foto</v-btn>
         </v-flex>
       </div>
@@ -51,6 +51,7 @@
         :key="index">
           <div v-if="arrayRepModel == i">
             <v-btn @click="fotosModel=true"> Add fotos</v-btn>
+            <v-btn @click="fotosRepresentanteModel=true">Meu album</v-btn>
           </div>
         </v-flex>
       </v-container>
@@ -68,15 +69,12 @@
             >
               <v-card flat tile>
                 <div>
-                 
-
                   <v-card-media
                     :src= arrayDeFotos[index]
                     height="250px"
-                    @dblclick="oi()"
+                    @dblclick="addFotoRepresentante()"
                   >
-                  </v-card-media>
-                 
+                  </v-card-media>          
                 </div>
               </v-card>
             </v-flex>
@@ -85,6 +83,35 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" flat="flat" @click.native="fotosModel = false">Fechar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- MODAL DE FOTOS DO REPRESENTANTE -->
+    <v-dialog v-model="fotosRepresentanteModel" max-width="790">
+      <v-card>
+        <v-card-title class="headline">Fotos do representante {{arrayRepModel}}</v-card-title>
+        <v-container v-bind="{ [`grid-list-md`]: true }" fluid>
+          <v-layout row wrap>
+            <v-flex
+              v-for="(n, index) in arrayDeFotos"
+              :key="index"
+              xs4
+            >
+              <v-card flat tile>
+                <div>
+                  <v-card-media
+                    :src= arrayDeFotos[index]
+                    height="250px"
+                  >
+                  </v-card-media>          
+                </div>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat="flat" @click.native="fotosRepresentanteModel = false">Fechar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -99,6 +126,7 @@ export default {
   data() {
     return {
       fotosModel: false,
+      fotosRepresentanteModel: false,
       selectPersonModel: null,
       selectPerson: ['admin', 'representante', 'usuário'],
       arrayDeFotos: [],
@@ -121,12 +149,21 @@ export default {
       }
     },
     addFoto(){
-      this.arrayDeFotos.push(this.image)
-      console.log("abaixo devemos exibir o array de fotos")
-      console.log(this.arrayDeFotos)
+      if (this.image != ''){
+        this.arrayDeFotos.push(this.image)
+        console.log("abaixo devemos exibir o array de fotos")
+        console.log(this.arrayDeFotos)
+      } else {
+        console.log("você esqueceu de colocar uma foto")
+      }
+      
+      
     },
     oi(){
-      console.log("oi")
+      console.log("oi, eu sou o goku!")
+    },
+    addFotoRepresentante(){
+      console.log("representante adicionou foto")
     }
   }
 };
