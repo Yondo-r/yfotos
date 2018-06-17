@@ -19,7 +19,7 @@
         </template>
       </v-list>
       <v-list dense v-if="roleName == 'Cliente'">
-        <template v-for="element in menuUser">
+        <template v-for="element in menuUsuario">
           <v-list-group :key="element.text" :prepend-icon="element.icon" append-icon="">
             <v-list-tile slot="activator">
               <v-list-tile-content>
@@ -36,24 +36,7 @@
         </template>
       </v-list>
       <v-list dense v-if="roleName == 'Funcionario'">
-        <template v-for="element in menuWork">
-          <v-list-group :key="element.text" :prepend-icon="element.icon" append-icon="">
-            <v-list-tile slot="activator">
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  <router-link style="text-decoration: none; color: white;" :to="element.link">
-                    <v-list-tile-title class="link">
-                      <span> {{ element.text }} </span>
-                    </v-list-tile-title>
-                  </router-link>
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-group>
-        </template>
-      </v-list>
-      <v-list dense v-if="roleName == 'Recepcionista'">
-        <template v-for="element in menuRecep">
+        <template v-for="element in menuUsuario">
           <v-list-group :key="element.text" :prepend-icon="element.icon" append-icon="">
             <v-list-tile slot="activator">
               <v-list-tile-content>
@@ -72,7 +55,7 @@
     </v-navigation-drawer>
     <v-toolbar fixed hide-overlay app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Kronos</v-toolbar-title>
+      <v-toolbar-title>Front Para fotos</v-toolbar-title>
       <v-spacer></v-spacer>
       <p><a class="usuario" @click="myProfile">{{ usuario }}</a></p>
       <div class="logout">
@@ -101,7 +84,7 @@ export default {
     usuario: window.localStorage.getItem('usuario'),
     drawer: true,
     roleName: window.localStorage.getItem('role'),
-    // roleName: '',
+    roleName: 'Admin',
     menu: [
       {
         icon: 'people',
@@ -141,10 +124,11 @@ export default {
   methods: {
     logout() {
       // Criar aqui a logica de logout!
-      console.log(localStorage.getItem('usuario'));
-      localStorage.removeItem('token');
-      localStorage.removeItem('usuario');
-      this.$router.push('/');
+      // console.log(localStorage.getItem('usuario'));
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('usuario');
+      // this.$router.push('/');
+      console.log("Se necessário, esse botão pode deslogar. já tem até uma função pronta aqui no código")
     },
     myProfile () {
       this.$router.push('/MyProfile');      

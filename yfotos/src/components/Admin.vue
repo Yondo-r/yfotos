@@ -3,7 +3,7 @@
     <v-flex xs7 offset-xs2>
       <!-- <div v-if="selectPersonModel == 'admin'"> -->
         <v-flex text-xs-center>
-          <v-btn @click="fotosModel=true"> Fotos</v-btn>
+          <v-btn @click="fotosModel = !fotosModel"> Fotos</v-btn>
         </v-flex>
         <div v-if="fotosModel == false">
           <picture-input

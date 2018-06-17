@@ -21,7 +21,7 @@ function route(path, component, name, children) {
 const router = new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: [
-    route('/home', Home, 'Home', [
+    route('/', Home, 'Home', [
       route('/helloWord', HelloWorld, 'HelloWord'),
       route('/Admin', Admin, 'Admin'),
       route('/Representante', Representante, 'Representante'),
